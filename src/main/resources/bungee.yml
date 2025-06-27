@@ -1,0 +1,4 @@
+name: Bungeefunmod
+version: '${project.version}'
+main: me.legit.bungeefunmod.Bungeefunmod
+description: A powerful BungeeCord plugin that adds fun chat commands, advanced moderation tools.
