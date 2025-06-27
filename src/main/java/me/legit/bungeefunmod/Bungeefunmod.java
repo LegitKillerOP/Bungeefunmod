@@ -1,6 +1,7 @@
 package me.legit.bungeefunmod;
 
-import me.legit.bungeefunmod.commands.mod.ModReloadCommand;
+import me.legit.bungeefunmod.commands.mod.*;
+import me.legit.bungeefunmod.commands.fun.*;
 import me.legit.bungeefunmod.managers.ConfigManager;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -15,9 +16,14 @@ public final class Bungeefunmod extends Plugin {
 
         configManager = new ConfigManager(this);
 
-        getLogger().info("BungeeFunModeration enabled.");
-
         getProxy().getPluginManager().registerCommand(this, new ModReloadCommand());
+        getProxy().getPluginManager().registerCommand(this, new HugCommand());
+        getProxy().getPluginManager().registerCommand(this, new SlapCommand());
+        getProxy().getPluginManager().registerCommand(this, new RoastCommand());
+        getProxy().getPluginManager().registerCommand(this, new CoinFlipCommand());
+        getProxy().getPluginManager().registerCommand(this, new EightBallCommand());
+
+        getLogger().info("BungeeFunModeration enabled.");
     }
 
     @Override

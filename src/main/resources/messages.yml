@@ -1,0 +1,28 @@
+hug: "&d{sender} gives a warm hug to {target}!"
+
+roasts:
+  - "&c{target}, your PvP skills are powered by lag."
+  - "&c{target}, even villagers laugh at you."
+  - "&c{target}, you miss every shot you don't take... and also every one you do."
+  - "&c{target}, you're the reason the server has a whitelist."
+  - "&c{target}, your aim is worse than a skeleton at noon."
+  - "&c{target}, the Ender Dragon fled when it saw you... not in fear, in pity."
+  - "&c{target}, even a dirt block has more value."
+  - "&c{target}, your builds look like they were griefed before you finished them."
+  - "&c{target}, you're the only one who loses to the tutorial boss."
+  - "&c{target}, your redstone logic makes creepers look intelligent."
+
+8ball-answers:
+  - "Yes!"
+  - "No way."
+  - "Ask again later."
+  - "Definitely!"
+  - "I'm not sure, try again."
+  - "Absolutely not."
+  - "It's very likely."
+  - "No chance at all."
+  - "Signs point to yes."
+  - "Don't count on it."
+  - "Yes... if you're lucky."
+  - "Only if the server doesn't crash first."
+  - "Maybe... just maybe."
