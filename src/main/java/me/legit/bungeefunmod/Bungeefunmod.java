@@ -35,6 +35,9 @@ public final class Bungeefunmod extends Plugin {
         getProxy().getPluginManager().registerCommand(this, new RoastCommand());
         getProxy().getPluginManager().registerCommand(this, new CoinFlipCommand());
         getProxy().getPluginManager().registerCommand(this, new EightBallCommand());
+        getProxy().getPluginManager().registerCommand(this, new DanceCommand());
+        getProxy().getPluginManager().registerCommand(this, new PetCommand());
+        getProxy().getPluginManager().registerCommand(this, new RandomColorCommand());
 
         getProxy().getPluginManager().registerCommand(this, new BanCommand());
         getProxy().getPluginManager().registerCommand(this, new TempbanCommand());
