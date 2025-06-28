@@ -11,16 +11,16 @@ import net.md_5.bungee.api.ChatColor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MuteCommand extends Command {
+public class TempbanCommand extends Command {
 
-    public MuteCommand() {
-        super("mute", "bungeefunmod.mod");
+    public TempbanCommand() {
+        super("tempban", "bungeefunmod.mod");
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (args.length < 3) {
-            sender.sendMessage(ChatColor.RED + "Usage: /mute <player> <duration> <reason>");
+            sender.sendMessage(ChatColor.RED + "Usage: /tempban <player> <duration> <reason>");
             return;
         }
 
@@ -31,32 +31,30 @@ public class MuteCommand extends Command {
 
         long durationMs = parseDuration(durationStr);
         if (durationMs <= 0) {
-            sender.sendMessage(ChatColor.RED + "Invalid duration. Use formats like 5m, 1h, 1d.");
+            sender.sendMessage(ChatColor.RED + "Invalid duration. Use formats like 5m, 2h, 1d.");
             return;
         }
 
         long until = System.currentTimeMillis() + durationMs;
 
         PunishmentManager pm = Bungeefunmod.getInstance().getPunishmentManager();
-        pm.addMute(targetName, staffName, reason, until);
-
-        sender.sendMessage(ChatColor.YELLOW + targetName + " has been muted for: " + reason);
+        pm.addTempBan(targetName, staffName, reason, until);
 
         ProxiedPlayer target = Bungeefunmod.getInstance().getProxy().getPlayer(targetName);
         if (target != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String untilFormatted = sdf.format(new Date(until));
-            target.sendMessage(ChatColor.RED + "You have been muted!\nReason: " + reason + "\nUntil: " + untilFormatted);
+            target.disconnect(ChatColor.RED + "You are temporarily banned!\nReason: " + reason +
+                    "\nUntil: " + sdf.format(new Date(until)));
         }
 
-        // Log to Discord
+        String msg = ChatColor.RED + targetName + " has been tempbanned for: " + reason;
+        Bungeefunmod.getInstance().getProxy().broadcast(msg);
+
+        // Discord log
         WebhookLogger logger = Bungeefunmod.getInstance().getWebhookLogger();
-        logger.sendEmbed("🔇 Player Muted",
-                "**Player:** " + targetName +
-                        "\n**Duration:** " + durationStr +
-                        "\n**Reason:** " + reason +
-                        "\n**By:** " + staffName,
-                15105570);
+        logger.sendEmbed("⏰ Tempban Issued", "**Player:** " + targetName +
+                "\n**Reason:** " + reason + "\n**Duration:** " + durationStr +
+                "\n**By:** " + staffName, 15844367);
     }
 
     private long parseDuration(String input) {
@@ -65,16 +63,11 @@ public class MuteCommand extends Command {
             long value = Long.parseLong(input.substring(0, input.length() - 1));
 
             switch (unit) {
-                case 's':
-                    return value * 1000L;
-                case 'm':
-                    return value * 60 * 1000L;
-                case 'h':
-                    return value * 60 * 60 * 1000L;
-                case 'd':
-                    return value * 24 * 60 * 60 * 1000L;
-                default:
-                    return -1;
+                case 's': return value * 1000L;
+                case 'm': return value * 60 * 1000L;
+                case 'h': return value * 60 * 60 * 1000L;
+                case 'd': return value * 24 * 60 * 60 * 1000L;
+                default: return -1;
             }
         } catch (Exception e) {
             return -1;
